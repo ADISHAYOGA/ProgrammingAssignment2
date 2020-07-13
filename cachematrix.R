@@ -9,12 +9,16 @@ makeCacheMatrix <- function(x = matrix()) {
 
   inv <- NULL
   set <- function(y) {
-    x <<- y
+    
+    x <<- y   # The double arrow assignment operator is a closure on the
+              # function environment. It instructs R to look for the value 
+              # of floating variables.
+    
     inv <<- NULL
   }
   
   get <- function() x
-  setInverse <- function(inverse) inv <<- inverse 
+  setInverse <- function() inv <<- inverse 
   getInverse <- function() inv
   list(set = set, get = get, setInverse = setInverse, getInverse = getInverse)
   
