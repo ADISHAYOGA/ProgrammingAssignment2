@@ -21,21 +21,29 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## This function computes the inverse of the matrix returned by the
+## The cacheSolve function computes the inverse of the matrix returned by the
 ## makeCacheMatrix and if the inverse has aleady been calculated and the 
 ## matrix hasn't changed then this function retrieves the inverse from the cache
 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
-  inv <- x$getInverse()
-  if(!is.null(inv)) {
+  inv <- x$getInverse() #this command gets the inverted square matrix x if it
+                        #is calculated and stored by the above makeCachematrix.
+  
+  if(!is.null(inv)) {  # This is a not operator asking that if inv is not null
+                       # then please return the inverted matrix.
+    
     message("retrieving cached data")
+    
     return(inv)
     
   }
   
+  # the codes written below perform the inverting of matrix if the solution
+  # is not cached and return the inv matrix.
   mat <- x$get()
-  inv <- solve(mat, ...)
+  inv <- solve(mat, ...) # solve() is a built in fution in R for calculating 
+                         # the inverse of a matrix.
   x$setInverse(inv)
   inv
 
